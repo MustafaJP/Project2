@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class performanceTest {
+public class algorithmTester {
     public static void main(String[] args) throws Exception {
         testDijkstraArray();
         empiricalTest(300, 1000, 500, 1000);
@@ -25,13 +25,13 @@ public class performanceTest {
         DijkstraAlgo.printResult(5, 0);
     }
 
+    // TODO: need to add the part b testing which is dijkstraListTimes
     private static void empiricalTest(int maxVertices, int maxWeight, int graphCount, int averageTimes)
             throws IOException {
         // Arrays to store the results of the empirical test.
         long[] vertexCounts = new long[graphCount];
         long[] edgeCounts = new long[graphCount];
         long[] dijkstraArrayTimes = new long[graphCount];
-        long[] dijkstraListTimes = new long[graphCount];
 
         for (int i = 0; i < graphCount; i++) {
             System.out.println("Generating graph " + (i + 1) + "...");
@@ -62,10 +62,9 @@ public class performanceTest {
         makeCSV.CSVprinter(vertexCounts, "vertice_counts.csv");
         makeCSV.CSVprinter(edgeCounts, "edge_counts.csv");
         makeCSV.CSVprinter(dijkstraArrayTimes, "dijkstra_array_times.csv");
-        makeCSV.CSVprinter(dijkstraListTimes, "dijkstra_list_times.csv");
-
     }
 
+    // TODO: need to add the part b testing which is dijkstraListTimes
     private static void empiricalTestSparse(int maxVertices, int maxWeight, int graphCount, int averageTimes)
             throws IOException {
 

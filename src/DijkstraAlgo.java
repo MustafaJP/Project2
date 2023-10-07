@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class DijkstraAlgo {
@@ -95,10 +96,10 @@ public class DijkstraAlgo {
             visited[u] = true;
             for (Edge e : adjList[u]) {
                 int v = e.dest;
-                if (!visited[v] && d[u] != Integer.MAX_VALUE && d[u] + e.weight < d[v]) {
-                    d[v] = d[u] + e.weight;
-                    pi[v] = u;
-                    pq.add(new Edge(u, v, d[v]));
+                if (!visited[v] && dist[u] != Integer.MAX_VALUE && dist[u] + e.weight < dist[v]) {
+                    dist[v] = dist[u] + e.weight;
+                    predecessor[v] = u;
+                    pq.add(new Edge(u, v, dist[v]));
                 }
             }
         }

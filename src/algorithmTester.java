@@ -52,7 +52,6 @@ public class algorithmTester {
         dijkstraTest.dijkstraPQStart(5, 0, g.adjList);
     }
 
-    // TODO: need to add the part b testing which is dijkstraListTimes
     private static void empiricalTest(int maxVertices, int maxWeight, int graphCount, int averageTimes)
             throws IOException {
         // Arrays to store the results of the empirical test.
@@ -81,7 +80,7 @@ public class algorithmTester {
                 totalDijkstraArrayTime += endTime - startTime;
 
                 startTime = System.nanoTime();
-                dijkstraTest.dijkstraPQStart(g.V, 0, g.adjList);
+                dijkstraTest.dijkstraPQStart(graph.V, 0, graph.adjList);
                 endTime = System.nanoTime();
                 totalDijkstraListTime += endTime - startTime;
             }
@@ -98,7 +97,6 @@ public class algorithmTester {
         makeCSV.CSVprinter(dijkstraArrayTimes, "dijkstra_array_times.csv");
     }
 
-    // TODO: need to add the part b testing which is dijkstraListTimes
     private static void empiricalTestSparse(int maxVertices, int maxWeight, int graphCount, int averageTimes)
             throws IOException {
 
@@ -129,7 +127,7 @@ public class algorithmTester {
                 totalDijkstraArrayTime += endTime - startTime;
 
                 startTime = System.nanoTime();
-                dijkstraTest.dijkstraPQStart(g.V, 0, g.adjList);
+                dijkstraTest.dijkstraPQStart(graph.V, 0, graph.adjList);
                 endTime = System.nanoTime();
                 totalDijkstraListTime += endTime - startTime;
             }
@@ -145,6 +143,7 @@ public class algorithmTester {
         makeCSV.CSVprinter(vertexCounts, "vertex_counts_sparse.csv");
         makeCSV.CSVprinter(edgeCounts, "edge_counts_sparse.csv");
         makeCSV.CSVprinter(dijkstraArrayTimes, "dijkstra_array_times_sparse.csv");
+        makeCSV.CSVprinter(dijkstraArrayTimes, "dijkstra_list_times_sparse.csv");
 
     }
 

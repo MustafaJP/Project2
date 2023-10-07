@@ -25,6 +25,33 @@ public class algorithmTester {
         DijkstraAlgo.printResult(5, 0);
     }
 
+    private static void testDijkstraPQ() {
+        System.out.println("testDijkstraPQ: ");
+        Graph g = new Graph(5);
+        g.addEdge(0,1,3);
+        g.addEdge(0,2,10);
+        g.addEdge(0,3,8);
+        g.addEdge(0,4,11);
+        g.addEdge(1,2,5);
+        g.addEdge(1,3,3);
+        g.addEdge(1,4,2);
+        g.addEdge(2,3,1);
+        g.addEdge(3,4,1);
+        /*g.addEdge(0, 1, 4);
+        g.addEdge(0, 2, 2);
+        g.addEdge(0, 3, 6);
+        g.addEdge(0, 4, 8);
+        g.addEdge(1, 3, 4);
+        g.addEdge(1, 4, 3);
+        g.addEdge(2, 3, 1);
+        g.addEdge(3, 1, 1);
+        g.addEdge(3, 4, 3);
+        */
+        g.printGraph();
+        DijkstraAlgo dijkstraTest = new DijkstraAlgo(5);
+        dijkstraTest.dijkstraPQStart(5, 0, g.adjList);
+    }
+
     // TODO: need to add the part b testing which is dijkstraListTimes
     private static void empiricalTest(int maxVertices, int maxWeight, int graphCount, int averageTimes)
             throws IOException {
@@ -32,6 +59,7 @@ public class algorithmTester {
         long[] vertexCounts = new long[graphCount];
         long[] edgeCounts = new long[graphCount];
         long[] dijkstraArrayTimes = new long[graphCount];
+        long[] dijkstraListTimes = new long[graphCount];
 
         for (int i = 0; i < graphCount; i++) {
             System.out.println("Generating graph " + (i + 1) + "...");
@@ -44,18 +72,24 @@ public class algorithmTester {
             // Calculate the total runtime of the Dijkstra algorithm using the
             // adjMatrix+Array approach.
             long totalDijkstraArrayTime = 0;
+            long totalDijkstraListTime = 0;
             for (int j = 0; j < averageTimes; j++) {
                 DijkstraAlgo dijkstraTest = new DijkstraAlgo(graph.V);
                 long startTime = System.nanoTime();
                 dijkstraTest.dijkstraArrayStart(graph.V, 0, graph.adjMatrix);
                 long endTime = System.nanoTime();
                 totalDijkstraArrayTime += endTime - startTime;
+
+                startTime = System.nanoTime();
+                dijkstraTest.dijkstraPQStart(g.V, 0, g.adjList);
+                endTime = System.nanoTime();
+                totalDijkstraListTime += endTime - startTime;
             }
 
             // Calculate the average runtime of the Dijkstra algorithm using the
             // adjMatrix+Array approach.
             dijkstraArrayTimes[i] = totalDijkstraArrayTime / averageTimes;
-
+            dijkstraListTimes[i] = totalDijkstraListTime / averageTimes;
         }
 
         // Generate CSV files containing the results of the empirical test.
@@ -72,6 +106,8 @@ public class algorithmTester {
         long[] vertexCounts = new long[graphCount];
         long[] edgeCounts = new long[graphCount];
         long[] dijkstraArrayTimes = new long[graphCount];
+        long[] dijkstraListTimes = new long[graphCount];
+
 
         for (int i = 0; i < graphCount; i++) {
             System.out.println("Generating graph " + (i + 1) + "...");
@@ -84,17 +120,24 @@ public class algorithmTester {
             // Calculate the total runtime of the Dijkstra algorithm using the
             // adjMatrix+Array approach.
             long totalDijkstraArrayTime = 0;
+            long totalDijkstraListTime = 0;
             for (int j = 0; j < averageTimes; j++) {
                 DijkstraAlgo dijkstraTest = new DijkstraAlgo(graph.V);
                 long startTime = System.nanoTime();
                 dijkstraTest.dijkstraArrayStart(graph.V, 0, graph.adjMatrix);
                 long endTime = System.nanoTime();
                 totalDijkstraArrayTime += endTime - startTime;
+
+                startTime = System.nanoTime();
+                dijkstraTest.dijkstraPQStart(g.V, 0, g.adjList);
+                endTime = System.nanoTime();
+                totalDijkstraListTime += endTime - startTime;
             }
 
             // Calculate the average runtime of the Dijkstra algorithm using the
             // adjMatrix+Array approach.
             dijkstraArrayTimes[i] = totalDijkstraArrayTime / averageTimes;
+            dijkstraListTimes[i] = totalDijkstraListTime / averageTimes;
 
         }
 

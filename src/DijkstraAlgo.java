@@ -84,6 +84,26 @@ public class DijkstraAlgo {
         return -1; // All nodes visited or unreachable
     }
 
+    public void dijkstraPQStart(int vertice, int src, LinkedList<Edge>[] adjList) {
+        initialization(vertice, src);
+        pq.add(new Edge(src, src, 0));
+        while (!pq.isEmpty()) {
+            Edge edge = pq.poll();
+            int u = edge.dest;
+            if (visited[u])
+                continue;
+            visited[u] = true;
+            for (Edge e : adjList[u]) {
+                int v = e.dest;
+                if (!visited[v] && d[u] != Integer.MAX_VALUE && d[u] + e.weight < d[v]) {
+                    d[v] = d[u] + e.weight;
+                    pi[v] = u;
+                    pq.add(new Edge(u, v, d[v]));
+                }
+            }
+        }
+    }
+
     private static void printPath(int src, int dest) {
         if (dest == src) {
             System.out.print(src + " ");

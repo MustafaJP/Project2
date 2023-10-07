@@ -95,6 +95,7 @@ public class algorithmTester {
         makeCSV.CSVprinter(vertexCounts, "vertice_counts.csv");
         makeCSV.CSVprinter(edgeCounts, "edge_counts.csv");
         makeCSV.CSVprinter(dijkstraArrayTimes, "dijkstra_array_times.csv");
+        makeCSV.CSVprinter(dijkstraArrayTimes, "dijkstra_list_times.csv");
     }
 
     private static void empiricalTestSparse(int maxVertices, int maxWeight, int graphCount, int averageTimes)

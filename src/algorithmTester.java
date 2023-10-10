@@ -2,8 +2,8 @@ import java.io.IOException;
 
 public class algorithmTester {
     public static void main(String[] args) throws Exception {
-        testDijkstraArray();
-        empiricalTest(300, 1000, 500, 1000);
+       // testDijkstraArray();
+       // empiricalTest(300, 1000, 500, 1000);
         empiricalTestSparse(1000, 1000, 500, 1000);
     }
 
